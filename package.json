@@ -3,15 +3,24 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite --host --port 8080 --open --cors --base=/web",
+    "server": "node .\\server\\server.js",
+    "build": "vite build --base=/web",
     "preview": "vite preview"
   },
   "dependencies": {
+    "cross-fetch": "^3.1.6",
+    "express": "^4.18.2",
     "vue": "^3.2.47"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
-    "vite": "^4.3.2"
+    "chalk": "^5.2.0",
+    "cors": "^2.8.5",
+    "sass": "^1.62.1",
+    "svgo": "^3.0.2",
+    "vite": "^4.3.2",
+    "vite-plugin-node": "^3.0.2",
+    "vite-plugin-svg-spritemap": "^0.0.12"
   }
 }
