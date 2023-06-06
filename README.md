@@ -17,5 +17,3 @@ npm run dev
 ## environment
 
 Node 18.16.0
-Yarn 2.4.3
-VITE 4.3.8

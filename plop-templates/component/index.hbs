@@ -1,0 +1,153 @@
+{{#if setup}}
+<script setup>
+import { reactive } from 'vue'
+
+const state1 = reactive({ obj: { name: 'template' } })
+const state2 = reactive({ type: 'vue' })
+
+const props = defineProps({
+  type: {
+    type: String,
+    required: true,
+    validator(value) {
+      return ['html', 'css', 'javascript'].includes(value)
+    },
+    default() {
+      return 'html'
+    }
+  },
+  title: {
+    type: String,
+    default: ''
+  },
+  titleModifiers: { default: () => ({}) }
+})
+
+const emit = defineEmits({
+  // 无校验
+  'update:title': null,
+  add(payload) {
+    // 校验
+    // 返回值 true / false 判断验证通过
+    return true
+  }
+})
+
+function click() {
+  // do
+  let value = 'html'
+  if (props.modelModifiers.capitalize) {
+    value = value.charAt(0).toUpperCase() + value.slice(1)
+  }
+  emit('update:title', value)
+}
+</script>
+{{/if}}
+
+{{#if template}}
+<template>
+  <div>
+    <input
+      type="text"
+      :value="title"
+      @input="$emit('update:title', $event.target.value)"
+    />
+    <button @click="(event) => click('message', event)">Button</button>
+  </div>
+  <div v-bind="$attrs">
+    Javascript
+  </div>
+</template>
+{{/if}}
+
+{{#if script}}
+<script>
+import { reactive } from 'vue'
+export default {
+  inheritAttrs: false,
+  name: '{{ properCase name }}',
+  props: {
+    type: {
+      type: String,
+      required: true,
+      validator(value) {
+        return ['html', 'css', 'javascript'].includes(value)
+      },
+      default() {
+        return 'html'
+      }
+    },
+    // <MyComponent v-model:title.capitalize="bookTitle" />
+    title: {
+      type: String,
+      default: ''
+    },
+    titleModifiers: {
+      default: () => ({})
+    }
+  },
+  emits: {
+    // 无校验
+    'update:title': null,
+    add(payload) {
+      // 校验
+      // 返回值 true / false 判断验证通过
+      return true
+    }
+  },
+  setup() {
+    const state = reactive({ count: 0 })
+    function increment() {
+      state.count++
+    }
+    return {
+      state,
+      increment
+    }
+  },
+  data() {
+    return {
+      obj: {
+        name: 'template'
+      },
+      type: 'vue'
+    }
+  },
+  computed: {},
+  watch: {
+    'obj.template'(newValue) {
+      // do
+    },
+    type: {
+      handler(newValue, oldValue) {
+        // 访问 vue 更新之后的 dom
+      },
+      flush: 'post'
+      // 强制立即执行回调 创建侦听器时立即执行一遍回调
+      // immediate: true
+    }
+  },
+  mounted() {},
+  methods: {
+    click(message, event) {
+      // do
+      let value = 'html'
+      if (this.modelModifiers.capitalize) {
+        value = value.charAt(0).toUpperCase() + value.slice(1)
+      }
+      this.$emit('update:title', value)
+    }
+  }
+}
+</script>
+{{/if}}
+
+{{#if style}}
+<style lang="scss" scoped>
+.btn {
+  v::deep .el-row {
+    border: 1px solid red;
+  }
+}
+</style>
+{{/if}}

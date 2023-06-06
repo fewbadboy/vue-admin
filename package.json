@@ -1,26 +1,49 @@
 {
   "name": "vue-admin",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host --port 8080 --open --cors --base=/web",
     "server": "node .\\server\\server.js",
     "build": "vite build --base=/web",
-    "preview": "vite preview"
+    "preview": "vite preview --port=8080",
+    "prepare": "husky install",
+    "new": "plop",
+    "eslint": "eslint --fix"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "cross-fetch": "^3.1.6",
-    "express": "^4.18.2",
     "vue": "^3.2.47"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/eslint-parser": "^7.21.8",
     "@vitejs/plugin-vue": "^4.1.0",
     "chalk": "^5.2.0",
     "cors": "^2.8.5",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.14.1",
+    "express": "^4.18.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "plop": "^3.1.2",
+    "prettier": "^2.8.8",
     "sass": "^1.62.1",
     "svgo": "^3.0.2",
     "vite": "^4.3.2",
+    "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-node": "^3.0.2",
-    "vite-plugin-svg-spritemap": "^0.0.12"
+    "vite-plugin-svg-spritemap": "^0.0.12",
+    "vite-plugin-webfont-dl": "^3.7.4"
+  },
+  "engines": {
+    "node": "18.16.0"
   }
 }

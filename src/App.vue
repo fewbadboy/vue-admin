@@ -1,17 +1,23 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import fetch from 'cross-fetch'
-import style from './styles/main.module.scss?inline'
+import { ref, onMounted, reactive } from 'vue'
+// import fetch from 'cross-fetch'
+// import style from './styles/main.module.scss?inline'
 import HelloWorld from './components/HelloWorld.vue'
 
 const url = ref('')
-
-onMounted(() => {
-  console.log(style.red)
+const express = reactive({
+  name: '',
+  one: ''
 })
 
-async function click() {
-  const response = await fetch('http://172.21.9.182:3000/name', {
+const cat = ref(null)
+
+onMounted(() => {
+  // console.log(style.red)
+})
+
+async function click () {
+  await fetch('http://172.21.9.182:3000/name', {
     method: 'GET',
     mode: 'cors',
     cache: 'no-cache',
@@ -19,10 +25,12 @@ async function click() {
       'Content-Type': 'application/json' // application/x-www-form-urlencoded, multipart/form-data
     }
   })
-  .then((res) => res.json())
-  .then(data => {
-    console.log(data)
-  })
+    .then((res) => res.json())
+    .then(({ name }) => {
+      console.log(name)
+      express.name = name
+      // console.log(import.meta.env.BASE_URL)
+    })
 
   url.value = import.meta.url
 }
@@ -38,6 +46,8 @@ async function click() {
     </a>
   </div>
   <div>{{ url }}</div>
+  <div>{{ express?.name }}</div>
+  <div>{{ cat ?? 'who' }}</div>
   <HelloWorld msg="Vite + Vue" />
 </template>
 
