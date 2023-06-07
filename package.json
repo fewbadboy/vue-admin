@@ -9,7 +9,8 @@
     "preview": "vite preview --port=8080",
     "prepare": "husky install",
     "new": "plop",
-    "eslint": "eslint --fix"
+    "eslint": "eslint --fix --ext .js,.vue .",
+    "svgo": "svgo -f ./src/icons/svg  --config ./src/icons/svgo.config.cjs"
   },
   "lint-staged": {
     "*.{js,vue}": [
@@ -40,7 +41,7 @@
     "vite": "^4.3.2",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-node": "^3.0.2",
-    "vite-plugin-svg-spritemap": "^0.0.12",
+    "vite-plugin-svg-spriter": "^1.0.0",
     "vite-plugin-webfont-dl": "^3.7.4"
   },
   "engines": {

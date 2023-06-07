@@ -1,8 +1,9 @@
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
 // import fetch from 'cross-fetch'
-// import style from './styles/main.module.scss?inline'
+import { redHash } from '@/styles/layout.module.css'
 import HelloWorld from './components/HelloWorld.vue'
+import SvgIcon from './components/SvgIcon/SvgIcon.vue'
 
 const url = ref('')
 const express = reactive({
@@ -13,7 +14,7 @@ const express = reactive({
 const cat = ref(null)
 
 onMounted(() => {
-  // console.log(style.red)
+  cat.value = redHash
 })
 
 async function click () {
@@ -46,12 +47,14 @@ async function click () {
     </a>
   </div>
   <div>{{ url }}</div>
+  <svg-icon name="404" icon-class="blue" />
   <div>{{ express?.name }}</div>
-  <div>{{ cat ?? 'who' }}</div>
+  <div id="cat" :class="redHash">{{ cat ?? 'who' }}</div>
   <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style lang="scss" scoped>
+@import url(./styles/main.scss);
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -63,5 +66,8 @@ async function click () {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+.blue {
+  color: blue;
 }
 </style>

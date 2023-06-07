@@ -6,13 +6,14 @@ import vue from '@vitejs/plugin-vue'
 import webfontDownload from 'vite-plugin-webfont-dl'
 import eslintPlugin from 'vite-plugin-eslint'
 import { VitePluginNode } from 'vite-plugin-node'
+import createSvgSpritePlugin from 'vite-plugin-svg-spriter'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
   resolve: {
     alias: {
-      // '@': '/src'
+      '@': '/src'
     }
   },
   css: {
@@ -20,6 +21,9 @@ export default defineConfig({
       scss: {
         additionalData: '$injectedColor: orange;'
       }
+    },
+    modules: {
+      localsConvention: 'camelCaseOnly'
     }
   },
   // https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts
@@ -53,9 +57,12 @@ export default defineConfig({
       'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap',
       'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap'
     ]),
+    createSvgSpritePlugin({
+      svgFolder: resolve(__dirname, 'src/icons/svg')
+    }),
     splitVendorChunkPlugin(),
     eslintPlugin({
-      include: ['./src/**/*.vue', './src/**/*.js']
+      include: ['./src/**/*.vue', '**/*.js']
     }),
     vue(),
     {
