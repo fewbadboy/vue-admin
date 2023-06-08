@@ -1,0 +1,38 @@
+{{#if option}}
+import { defineStore } from 'pinia'
+
+export const use{{ pascalCase name }}Store = defineStore('alters', {
+  state: () => {
+    return {
+      count: 0
+    }
+  },
+  getters: {
+    double: (state) => state.count * 2
+  },
+  actions: {
+    increment () {
+      this.count++
+    }
+  }
+})
+{{/if}}
+
+{{#if setup}}
+import { ref, computed } from 'vue'
+import { defineStore } from 'pinia'
+
+export const use{{ pascalCase name }}Store = defineStore('alters', () => {
+  const count = ref(0)
+  const double = computed(() => count.value * 2)
+  function increment () {
+    count.value++
+  }
+
+  return {
+    count,
+    double,
+    increment
+  }
+})
+{{/if}}

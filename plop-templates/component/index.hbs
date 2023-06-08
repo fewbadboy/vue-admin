@@ -2,17 +2,17 @@
 <script setup>
 import { reactive } from 'vue'
 
-const state1 = reactive({ obj: { name: 'template' } })
+const state1 = reactive({ obj: { name: 'template' }})
 const state2 = reactive({ type: 'vue' })
 
 const props = defineProps({
   type: {
     type: String,
     required: true,
-    validator(value) {
+    validator (value) {
       return ['html', 'css', 'javascript'].includes(value)
     },
-    default() {
+    default () {
       return 'html'
     }
   },
@@ -26,14 +26,14 @@ const props = defineProps({
 const emit = defineEmits({
   // 无校验
   'update:title': null,
-  add(payload) {
+  add (payload) {
     // 校验
     // 返回值 true / false 判断验证通过
     return true
   }
 })
 
-function click() {
+function click () {
   // do
   let value = 'html'
   if (props.modelModifiers.capitalize) {
@@ -59,7 +59,6 @@ function click() {
   </div>
 </template>
 {{/if}}
-
 {{#if script}}
 <script>
 import { reactive } from 'vue'
@@ -70,10 +69,10 @@ export default {
     type: {
       type: String,
       required: true,
-      validator(value) {
+      validator (value) {
         return ['html', 'css', 'javascript'].includes(value)
       },
-      default() {
+      default () {
         return 'html'
       }
     },
@@ -89,15 +88,15 @@ export default {
   emits: {
     // 无校验
     'update:title': null,
-    add(payload) {
+    add (payload) {
       // 校验
       // 返回值 true / false 判断验证通过
       return true
     }
   },
-  setup() {
+  setup () {
     const state = reactive({ count: 0 })
-    function increment() {
+    function increment () {
       state.count++
     }
     return {
@@ -105,21 +104,21 @@ export default {
       increment
     }
   },
-  data() {
+  data () {
     return {
       obj: {
         name: 'template'
       },
-      type: 'vue'
+      language: 'vue'
     }
   },
   computed: {},
   watch: {
-    'obj.template'(newValue) {
+    'obj.template' (newValue) {
       // do
     },
-    type: {
-      handler(newValue, oldValue) {
+    language: {
+      handler (newValue, oldValue) {
         // 访问 vue 更新之后的 dom
       },
       flush: 'post'
@@ -127,9 +126,9 @@ export default {
       // immediate: true
     }
   },
-  mounted() {},
+  mounted () {},
   methods: {
-    click(message, event) {
+    click (message, event) {
       // do
       let value = 'html'
       if (this.modelModifiers.capitalize) {

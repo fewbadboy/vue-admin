@@ -8,7 +8,7 @@ export default {
     {
       type: 'input',
       name: 'name',
-      message: 'component name please(PascalCase):',
+      message: 'component name please(pascalCase):CustomComponent',
       validate: notEmpty('name')
     },
     {
@@ -46,11 +46,11 @@ export default {
     }
   ],
   actions: (data) => {
-    const name = '{{ kebabCase  name}}'
+    const name = '{{ pascalCase name }}'
     const actions = [
       {
         type: 'add',
-        path: `src/views/${name}/index.vue`,
+        path: `src/components/${name}/${name}.vue`,
         templateFile: 'plop-templates/component/index.hbs',
         data: {
           name: name,

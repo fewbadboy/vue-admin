@@ -1,40 +1,37 @@
 <script setup>
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useCountNumberStore } from '@/stores/countNumber'
 
 defineProps({
   msg: String
 })
 
-const count = ref(0)
+const store = useCountNumberStore()
+const { count, double } = storeToRefs(store)
+const { increment } = store
+
+const number = ref(0)
+
+function click () {
+  number.value++
+  increment()
+}
+
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <button type="button" @click="click">count is {{ count }}</button>
     <p>
       Edit
-      {{ count?.value ? 'xixi' : 'Test' }}
+      {{ number ? ' gt 0' : 'eq 0' }}
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
+    <p>Double of  {{ count }} is {{ double }}</p>
   </div>
-
-  <p>
-    Check out
-    <a
-      href="https://vuejs.org/guide/quick-start.html#local"
-      target="_blank"
-    >
-      create-vue
-    </a>, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
 <style scoped>
